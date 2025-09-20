@@ -19,10 +19,10 @@ export function Header({ title }: HeaderProps) {
 const styles = StyleSheet.create({
   header: {
     padding: 16,
+    paddingTop: 0
   },
   headerText: {
     fontSize: 20,
     fontWeight: '600',
-    color: 'white',
   },
 });

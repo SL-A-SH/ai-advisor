@@ -1,29 +1,22 @@
-import Constants from 'expo-constants';
-
-export async function queryLLM(prompt: string): Promise<string> {
-  const apiKey = Constants.expoConfig?.extra?.EXPO_PUBLIC_OPENAI_API_KEY; 
-
-  if (!apiKey) {
-    throw new Error("API Key is missing from Expo config.");
-  }
-
+export async function queryLLM(prompt: string): Promise<any> {
   const response = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${apiKey}`,
+      Authorization: `Bearer ${process.env.EXPO_PUBLIC_OPENAI_API_KEY}`,
     },
     body: JSON.stringify({
       model: "gpt-4o-mini",
-      messages: [{ role: "user", content: prompt }]
+      messages: [{ role: "user", content: prompt }],
+      response_format: { type: "json_object" }
     })
   });
 
-  console.log("API Key", apiKey);
   if (!response.ok) {
-    throw new Error(`LLM API error: ${response.statusText}`);
+    const errText = await response.text();
+    throw new Error(`LLM API error: ${response.status} - ${errText}`);
   }
 
   const data = await response.json();
-  return data.choices[0].message.content;
+  return JSON.parse(data.choices[0].message.content);
 }

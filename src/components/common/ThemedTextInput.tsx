@@ -13,14 +13,12 @@ export function ThemedTextInput({
   darkColor,
   ...rest
 }: ThemedTextInputProps) {
-  const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
   const borderColor = useThemeColor({ light: lightColor, dark: darkColor }, 'tint');
-  const backgroundColor = useThemeColor({ light: lightColor, dark: darkColor }, 'tint');
 
   return (
     <TextInput
       style={[
-        { color, borderColor, backgroundColor },
+        { borderColor },
         styles.textInput,
         style,
       ]}
@@ -31,9 +29,12 @@ export function ThemedTextInput({
 
 const styles = StyleSheet.create({
   textInput: {
-    padding: 10,
-    borderWidth: 1,
-    margin: 12,
+    backgroundColor: '#ffffff',
     borderRadius: 20,
+    borderWidth: 2,
+    color: "#11181C",
+    padding: 10,
+    margin: 12,
+    minHeight: 80
   },
 });

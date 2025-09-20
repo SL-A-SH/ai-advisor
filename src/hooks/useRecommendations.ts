@@ -13,7 +13,6 @@ export function useRecommendations() {
     try {
       const recs = await getRecommendations(query);
       setRecommendations(recs);
-      console.log(recs);
     } catch (err: any) {
       setError(err.message);
     } finally {
