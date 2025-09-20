@@ -11,7 +11,7 @@
         "buildType": "apk"
       },
       "env": {
-        "EXPO_PUBLIC_OPEN_API_KEY": "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"
+        "EXPO_PUBLIC_OPENAI_API_KEY": "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"
       }
     },
     "preview": {
